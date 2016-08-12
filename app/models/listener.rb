@@ -1,2 +1,2 @@
-class Listener < ApplicationRecord
+class Listener < ActiveRecord::Base
 end
