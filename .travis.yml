@@ -5,15 +5,11 @@ env:
 - DB=postgresql
 script:
 - bundle exec rspec
-before_script:
-- rails db:create RAILS_ENV=test
-- rails db:migrate
-bundler_args: "--binstubs=./bundler_stubs"
-deploy:
-  provider: heroku
-  api_key:
-    secure: b8JasX3fLw7SZtvWLSrxkuQPlwK1vuTHO1PYYw2JX3rOVKl2KlJdTRO/hXqGuUkFP71v0YSJ7taYBObnGVlOF+GN1/LXiIEe7Tds6JjGW4QUM7m/3rx8y0znWB0xzh+zlfNQAfQ772GLJNBbaM4XG2IQWa3ct1UIEaLGfWlqFvS1iSOHaarBkJaspVAsMWyPU37UlKh/VYF3KMTXA9t1C46AtyROcmf6WQBsIaU46MQU9LC+zPCTKgOroN8ARBsZ0k1a4/USFfpg4VsaQ61jwYqcGrnqTzWNEtfQFqbZG7m2mglHiqVDyx4SM+bG7VmAFWLVrWgMp5gng00zcuEZ/hRdEeaNFwxzkGM13v6nuonFvKdqHJTcFADnZV2J1hS4M3DuBwwGiZonWJKnc0U4jBmUo1Mg53kHC4v9om9IBC8RMlIYPTfsvf8Isxt2PUGDO1peeuJ2nPSFJVuYIp0Z7otpl/uMijEyeg3bvh8bvN8epeibkg5IzM2ziVbNJwBbYewFKPWSN06viERYc+6fbspaFYdsyfZ0qoW7VBrh6v2HXKxa2f/2SzyGO+vNX1Q6SMw4Efl/XcqXMMIcz7jUrLZPlqR5m5DhG8N47WFKCc5ptOjclIhVNBVkSpovG+N5kpYwuSVp7zHmIa/IBdU9VswJjETkubs92AHSkgxhYHc=
-  app: WeJ
-  on:
-    repo: William-Jung/WeJ
-    branch: travis
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: b8JasX3fLw7SZtvWLSrxkuQPlwK1vuTHO1PYYw2JX3rOVKl2KlJdTRO/hXqGuUkFP71v0YSJ7taYBObnGVlOF+GN1/LXiIEe7Tds6JjGW4QUM7m/3rx8y0znWB0xzh+zlfNQAfQ772GLJNBbaM4XG2IQWa3ct1UIEaLGfWlqFvS1iSOHaarBkJaspVAsMWyPU37UlKh/VYF3KMTXA9t1C46AtyROcmf6WQBsIaU46MQU9LC+zPCTKgOroN8ARBsZ0k1a4/USFfpg4VsaQ61jwYqcGrnqTzWNEtfQFqbZG7m2mglHiqVDyx4SM+bG7VmAFWLVrWgMp5gng00zcuEZ/hRdEeaNFwxzkGM13v6nuonFvKdqHJTcFADnZV2J1hS4M3DuBwwGiZonWJKnc0U4jBmUo1Mg53kHC4v9om9IBC8RMlIYPTfsvf8Isxt2PUGDO1peeuJ2nPSFJVuYIp0Z7otpl/uMijEyeg3bvh8bvN8epeibkg5IzM2ziVbNJwBbYewFKPWSN06viERYc+6fbspaFYdsyfZ0qoW7VBrh6v2HXKxa2f/2SzyGO+vNX1Q6SMw4Efl/XcqXMMIcz7jUrLZPlqR5m5DhG8N47WFKCc5ptOjclIhVNBVkSpovG+N5kpYwuSVp7zHmIa/IBdU9VswJjETkubs92AHSkgxhYHc=
+#   app: WeJ
+#   on:
+#     repo: William-Jung/WeJ
+#     branch: travis
