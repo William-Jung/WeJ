@@ -8,6 +8,7 @@ script:
 before_script:
 - rails db:create RAILS_ENV=test
 - rails db:migrate
+bundler_args: "--binstubs=./bundler_stubs"
 deploy:
   provider: heroku
   api_key:
