@@ -1,3 +1,14 @@
 language: ruby
 rvm:
 - 2.3.0
+env:
+- DB=postgresql
+script:
+- bundle exec rspec
+before_script:
+- rails db:create RAILS_ENV=test
+- rails db:migrate
+deploy:
+  provider: heroku
+  app: we-j
+  api_key: 14dc9cde4358aa659ee8bdf05cef58e993e96acb02b21fd0e12a29c2123d669bb384a6e8dc543d55b2cb0aea9c6eab6d0e504c2a613e2d80d17495183531c6a4
