@@ -5,4 +5,9 @@ class Playlist < ActiveRecord::Base
   has_many :playlistsongs
   has_many :songs, through: :playlistsongs
 
+  # returns an array of all of the songs in arrays of five
+  def group_wej_songs
+    self.songs.each_slice(5).to_a
+  end
+
 end
