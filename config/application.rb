@@ -10,7 +10,6 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -33,3 +32,4 @@ module Wej
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+RSpotify::authenticate("704b6c07ae9446508303849832107be0", "a5e4ad0bf7fd41b58ff649ca9ab5be18")

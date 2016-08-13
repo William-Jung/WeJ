@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
-# gem 'omniauth-spotify'
+gem 'omniauth-spotify'
 gem 'rspotify'
 
 gem 'bcrypt', '~> 3.1.7'
