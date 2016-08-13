@@ -1,0 +1,5 @@
+<%= form_tag "/playlists/verify" do %>
+  <%= select_tag(:id, options_for_select(@playlists)) %>
+  <%= submit_tag("Select") %>
+<% end %>
+<%= link_to "Add playlist from Spotify", new_playlist_path %>
