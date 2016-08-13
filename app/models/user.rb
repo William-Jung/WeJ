@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
   has_secure_password
   before_save :full_name
 
+  has_many :playlists, foreign_key: :admin_id
+  has_many :votes
+
   def full_name
     self.full_name = first_name + ' ' + last_name
   end
-end 
+end

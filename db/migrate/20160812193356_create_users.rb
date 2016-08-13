@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :full_name
       t.string :email
       t.string :password_digest
+      t.string :spotify_access_token
 
       t.timestamps null: false
     end
