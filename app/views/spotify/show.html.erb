@@ -1,0 +1,36 @@
+Hey!
+<br>
+<form action="/spotify" method="POST" name='search'>
+  <input type="search" name="query">
+  <select name="type">
+    <option value="song">Song</option>
+    <option value="artist">Artist</option>
+    <option value="album">Album</option>
+  </select>
+</form>
+
+<% if @return_json %>
+  <% if @return_json[0].class == RSpotify::Track %>
+    <% @return_json.each do |song| %>
+      <%= song.name %><br>
+      <%= song.album.name %><br>
+      <%= song.artists[0].name %><br><br>
+    <% end %>
+  <% end %>
+
+  <% if @return_json[0].class == RSpotify::Artist %>
+    <% @return_json.each do |artist| %>
+      <%= artist.name %><br>
+      <%= artist.genres[0] %><br>
+      <%= artist.popularity %><br><br>
+    <% end %>
+  <% end %>
+
+  <% if @return_json[0].class == RSpotify::Album %>
+    <% @return_json.each do |album| %>
+      <%= album.name %><br>
+      <%= album.genres[0] %><br>
+      <%= album.release_date %><br>
+    <% end %>
+  <% end %>
+<% end %>
