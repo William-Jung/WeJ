@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :first_name, :last_name
+  has_many :playlists, foreign_key: :admin_id
+  has_many :votes
 
   has_secure_password
   before_save :set_full_name

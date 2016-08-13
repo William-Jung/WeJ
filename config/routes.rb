@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'playlists#find'
+
   get '/spotify' => 'spotify#show'
 
   post '/spotify' => 'spotify#search'
@@ -10,9 +12,15 @@ Rails.application.routes.draw do
   get 'playlists/new' => 'playlists#new'
   get '/playlists/:id' => 'playlists#show'
   get '/users/new' => 'users#new', as: "new_user"
+
   post '/users' => 'users#create'
   get '/users/:id' => 'users#show'
+
   get "/sessions/new" => "sessions#new"
   post "/sessions" => "sessions#create"
+
   get '/auth/spotify/callback' => 'users#spotify'
+
+  get "/playlists/find" => "playlists#find"
+  post "/playlists/verify" => "playlists#verify"
 end
