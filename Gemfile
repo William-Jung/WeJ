@@ -26,6 +26,7 @@ gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 gem 'omniauth-spotify'
 gem 'rspotify'
+gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 
 gem 'bcrypt', '~> 3.1.7'
 

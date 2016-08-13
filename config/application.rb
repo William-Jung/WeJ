@@ -32,4 +32,4 @@ module Wej
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
-RSpotify::authenticate("704b6c07ae9446508303849832107be0", "a5e4ad0bf7fd41b58ff649ca9ab5be18")
+RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])

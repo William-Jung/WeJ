@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   get '/spotify/show' => 'spotify#show'
 
   get '/playlists' => 'playlists#index', as: 'playlists'
-  get '/playlists/new' => 'playlists#new'
-  get '/playlists/:id' => 'playlists#show'
+  get '/playlists/new' => 'playlists#new', as: 'new_playlist'
   get "/playlists/find" => "playlists#find"
+  get '/playlists/:id' => 'playlists#show'
+  get '/playlists/:id/admin' => 'playlists#admin', as: 'playlist_admin'
   post "/playlists/verify" => "playlists#verify"
 
   get '/users/new' => 'users#new', as: "new_user"
