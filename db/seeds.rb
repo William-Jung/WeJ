@@ -15,3 +15,7 @@ end
 50.times do
   Playlistsong.create(playlist_id: rand(1..5), song_id: rand(1..25))
 end
+
+1200.times do
+  Vote.create(user: [helom, will, dumitru].sample, playlistsong: Playlistsong.all.sample, request_type: "vote")
+end

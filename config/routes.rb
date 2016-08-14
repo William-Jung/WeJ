@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/playlists/:id' => 'playlists#show'
   get '/playlists/:id/admin' => 'playlists#admin', as: 'playlist_admin'
   post "/playlists/verify" => "playlists#verify"
+  put '/playlists' => 'playlists#update'
 
   get '/users/new' => 'users#new', as: "new_user"
   post '/users' => 'users#create'
@@ -23,4 +24,5 @@ Rails.application.routes.draw do
   post "/sessions" => "sessions#create"
 
   get '/auth/spotify/callback' => 'users#spotify'
+
 end
