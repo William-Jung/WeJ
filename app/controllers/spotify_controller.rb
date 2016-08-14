@@ -8,19 +8,19 @@ class SpotifyController < ApplicationController
 
   def search
 
-    if params[:type] == "song"
-      @return_json = RSpotify::Track.search(params[:query], limit: 10)
-      render 'show'
-
-    elsif params[:type] == "artist"
-      @return_json = RSpotify::Artist.search(params[:query], limit: 10)
-      render 'show'
-
-    elsif params[:type] == "album"
-      @return_json = RSpotify::Album.search(params[:query], limit: 10)
-      render 'show'
-    else
-      flash[:notice] = "We couldn't find what you were looking for!"
+    if request.xhr?
+      if params[:type] == "song"
+        @return_json = RSpotify::Track.search(params[:query], limit: 10)
+        render json: @return_json
+      elsif params[:type] == "artist"
+        @return_json = RSpotify::Artist.search(params[:query], limit: 10)
+        render json: @return_json
+      elsif params[:type] == "album"
+        @return_json = RSpotify::Album.search(params[:query], limit: 10)
+        render json: @return_json
+      else
+        flash[:notice] = "We couldn't find what you were looking for!"
+      end
     end
 
   end

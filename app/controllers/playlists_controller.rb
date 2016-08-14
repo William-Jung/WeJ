@@ -60,6 +60,14 @@ include UsersHelper
     end
   end
 
+  def update
+    # @playlist = Playlist.find(params[:id])
+    p params
+    @spotify_song = RSpotify::Track.find(params[:song])
+    render json: @spotify_song
+    # @song = Song.new()
+  end
+
   def index
     if logged_in? && current_user.playlists
       @playlists = current_user.playlists.map{|playlist| [playlist.name, playlist.id]}
@@ -71,6 +79,7 @@ include UsersHelper
   end
 
   def show
+    @playlist = Playlist.find(params[:id])
   end
 
   def admin

@@ -57,17 +57,18 @@ ActiveRecord::Schema.define(version: 20160814163538) do
     t.string   "full_name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.string   "spotify_access_token"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.text     "spotify_credentials"
   end
 
   create_table "votes", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "library_id"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "playlistsong_id"
+    t.string   "request_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
