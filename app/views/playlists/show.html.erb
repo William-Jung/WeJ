@@ -34,3 +34,13 @@ Hey!
     <% end %>
   <% end %>
 <% end %>
+
+<% @playlistsongs.each do |playlistsong| %>
+  <p><%= playlistsong.song.title %></p>
+  <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post do |f| %>
+    <%= hidden_field_tag 'user_id', current_user.id %>
+    <%= hidden_field_tag 'vote', 1 %>
+    <%= hidden_field_tag 'request_type', 'vote' %>
+    <%= f.submit "vote" %>
+  <% end %>
+<% end %>
