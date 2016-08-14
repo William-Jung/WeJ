@@ -9,7 +9,21 @@ include UsersHelper
   end
 
   def create
+    p '======================================='
+    p params
+    p '======================================='
     @playlist = Playlist.new(playlist_params)
+
+
+    RSpotify::Playlist.find(playlist_params[:spotify_id]).tracks.each do |track|
+
+      Song.create()
+
+    end
+
+
+
+
     @playlist.name = params[:name]
     @playlist.admin_id = current_user.id
     @playlist.generate_passcode
@@ -57,6 +71,11 @@ include UsersHelper
   end
 
   def show
+  end
+
+  def admin
+
+
   end
 
   private
