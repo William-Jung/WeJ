@@ -1,0 +1,11 @@
+<%= form_tag  "/playlists", :id => 'create-playlist-form' do %>
+  <%= select_tag(:spotify_id, options_for_select(@spotify_playlists)) %>
+  <%= label_tag("Number of requests per hour") %>
+  <%= number_field_tag("request_limit", nil, in: 0..10) %>
+  <%= label_tag("Set minimum of flags per song") %>
+  <%= number_field_tag("flag_minimum", nil, in: 0..10) %>
+  <%= label_tag("Allow explicit songs") %>
+  <%= check_box_tag("allow_explicit", "true", "false" ) %>
+  <%= submit_tag "Create WeJ Playlist" %>
+<% end %>
+

@@ -10,8 +10,13 @@ class Playlist < ActiveRecord::Base
     self.songs.each_slice(5).to_a
   end
 
+
   def top_requested_songs
     self.playlistsongs.sort_by {|playlistsong| playlistsong.votes.count}.reverse.each_slice(5).to_a.first
+  end
+
+  def generate_passcode
+    self.passcode = (0...6).map { ('a'..'z').to_a[rand(26)] }.join.upcase
   end
 
 end
