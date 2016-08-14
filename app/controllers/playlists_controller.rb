@@ -10,7 +10,12 @@ include UsersHelper
 
   def create
     @playlist = Playlist.new(playlist_params)
-
+    user = User.find(session[:user_id])
+    spotify_user = RSpotify::User.new(user.spotify_user_hash)
+    spotify_info = RSpotify::Playlist.find(spotify_user.id, params[:spotify_id])
+    @playlist.name = spotify_info.name
+    @playlist.admin_id = user.id
+    @playlist.generate_passcode
     if @playlist.save
       redirect_to playlist_admin_path(@playlist)
     else
