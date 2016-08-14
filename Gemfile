@@ -32,6 +32,13 @@ gem 'faker'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
+gem 'bootstrap', '~> 4.0.0alpha3'
+gem 'bootstrap_form'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
