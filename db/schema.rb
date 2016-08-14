@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 20160812193416) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "library_id"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "playlistsong_id"
+    t.string   "request_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

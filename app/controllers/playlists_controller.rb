@@ -24,4 +24,8 @@ include UsersHelper
     end
   end
 
+  def show
+    @playlist = Playlist.find(params[:id])
+  end
+
 end

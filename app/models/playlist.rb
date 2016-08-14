@@ -10,4 +10,8 @@ class Playlist < ActiveRecord::Base
     self.songs.each_slice(5).to_a
   end
 
+  def top_requested_songs
+    self.playlistsongs.sort_by {|playlistsong| playlistsong.votes.count}.reverse.each_slice(5).to_a.first
+  end
+
 end
