@@ -2,6 +2,22 @@ class PlaylistsController < ApplicationController
 
 include UsersHelper
 
+  def new
+    user = User.find(session[:user_id])
+    spotify_user = RSpotify::User.new(user.spotify_user_hash)
+    @spotify_playlists = spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
+  end
+
+  def create
+    @playlist = Playlist.new(playlist_params)
+
+    if @playlist.save
+      redirect_to playlist_admin_path(@playlist)
+    else
+      render :new
+    end
+  end
+
   def find
     unless logged_in?
       redirect_to new_session_path
@@ -39,7 +55,11 @@ include UsersHelper
   end
 
   def show
-
   end
+
+  private
+    def playlist_params
+      params.permit(:spotify_id, :request_limit, :flag_minimum, :allow_explicit)
+    end
 
 end

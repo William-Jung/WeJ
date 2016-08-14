@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813192753) do
+ActiveRecord::Schema.define(version: 20160814013417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160813192753) do
     t.boolean  "allow_explicit"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "spotify_id"
   end
 
   create_table "playlistsongs", force: :cascade do |t|
@@ -55,10 +56,9 @@ ActiveRecord::Schema.define(version: 20160813192753) do
     t.string   "full_name"
     t.string   "email"
     t.string   "password_digest"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.text     "spotify_credentials"
-    t.string   "spotify_access_token"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   create_table "votes", force: :cascade do |t|
