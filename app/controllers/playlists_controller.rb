@@ -74,7 +74,7 @@ include UsersHelper
   end
 
   def admin
-
+    @playlist = Playlist
 
   end
 
