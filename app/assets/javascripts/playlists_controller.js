@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-
+  var songArray = [];
   $('#create-playlist-form').on('submit', (function(event) {
     event.preventDefault();
 
@@ -17,5 +17,14 @@ $(document).ready(function() {
 
 
   );
+
+  $('#song-title').on('click', function() {
+    // event.preventDefault();
+
+    console.log('clicked!')
+  // $('spotify-track-widget')
+
+  });
+
 
 });
