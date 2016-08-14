@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to playlists_find_path
     else
       @errors = @user.errors.full_messages
       render new_user_path

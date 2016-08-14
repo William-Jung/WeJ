@@ -27,17 +27,16 @@ include UsersHelper
   end
 
   def verify
-    if params[:id]
-      @playlist = Playlist.find(params[:id])
-    else
+    @playlist = Playlist.find_by(passcode: params[:passcode]) || Playlist.find(params[:id])
+    if !@playlist
       @playlist = nil
     end
 
     if @playlist
-      if @playlist.passcode == params[:passcode] && @playlist.passcode != nil
-        redirect_to playlists_path
-      elsif @playlist.admin_id == session[:user_id]
-        redirect_to playlist_admin_path
+      if @playlist.passcode == params[:passcode]
+        redirect_to show_playlist_path(@playlist)
+      elsif @playlist.admin_id == current_user.id
+        redirect_to playlist_admin_path(@playlist)
       else
         render 'find'
       end
@@ -66,6 +65,7 @@ include UsersHelper
 
   def show
     @playlist = Playlist.find(params[:id])
+    @playlistsongs = @playlist.playlistsongs
   end
 
   private
