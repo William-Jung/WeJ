@@ -1,0 +1,4 @@
+<h1><%= @playlist.name %></h1>
+<p>Playlist passcode: <%= @playlist.passcode %></p>
+<iframe id="spotify-track-widget" src="https://embed.spotify.com/?uri=spotify%3Atrack%3A33Q6ldVXuJyQmqs8BmAa0k" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+<%= render @playlist.playlistsongs %>

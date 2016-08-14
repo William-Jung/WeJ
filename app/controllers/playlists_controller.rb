@@ -3,21 +3,41 @@ class PlaylistsController < ApplicationController
 include UsersHelper
 
   def new
-    user = User.find(session[:user_id])
-    spotify_user = RSpotify::User.new(user.spotify_user_hash)
-    @spotify_playlists = spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
+    p current_spotify_user
+    @spotify_playlists = current_spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
   end
 
   def create
     @playlist = Playlist.new(playlist_params)
-    @playlist.name = params[:name]
+
+    @playlist.name = playlist_params[:name]
     @playlist.admin_id = current_user.id
     @playlist.generate_passcode
+
     if @playlist.save
+      RSpotify::Playlist.find(current_spotify_user.id, playlist_params[:spotify_id]).tracks.each do |track|
+
+        @song_json = RSpotify::Track.find(track.id)
+        song_data = {
+          title: @song_json.name,
+          artist: @song_json.artists[0].name,
+          album: @song_json.album.name,
+          # release_date = @song_json
+          album_art: @song_json.album.images[0]['url'],
+          spotify_id: track.id
+        }
+
+        song = Song.create(song_data)
+        Playlistsong.create(playlist: @playlist, song: song)
+
+        @playlist.save
+      end
+
       redirect_to playlist_admin_path(@playlist)
     else
       render :new
     end
+
   end
 
   def find
@@ -68,9 +88,16 @@ include UsersHelper
     @playlistsongs = @playlist.playlistsongs
   end
 
+  def admin
+    @playlist = Playlist.find(params[:id])
+
+
+
+  end
+
   private
-    def playlist_params
-      params.permit(:spotify_id, :name, :request_limit, :flag_minimum, :allow_explicit)
-    end
+  def playlist_params
+    params.permit(:spotify_id, :name, :request_limit, :flag_minimum, :allow_explicit)
+  end
 
 end

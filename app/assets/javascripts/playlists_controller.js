@@ -1,11 +1,10 @@
 $(document).ready(function() {
 
-
+  var songArray = [];
   $('#create-playlist-form').on('submit', (function(event) {
     event.preventDefault();
 
     var playlistName = $('#spotify_id option:selected').text()
-    console.log(playlistName);
     $playlistForm = $(this)
     var data = $playlistForm.serializeArray();
     data.push({name: 'name', value: playlistName});
@@ -14,17 +13,18 @@ $(document).ready(function() {
       type: 'POST',
       data: data
     })
-    .done(function() {
-      console.log("success");
-    })
-
-
   })
 
 
   );
 
+  $('#song-title').on('click', function() {
+    // event.preventDefault();
 
+    console.log('clicked!')
+  // $('spotify-track-widget')
+
+  });
 
 
 });
