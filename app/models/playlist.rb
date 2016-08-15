@@ -10,12 +10,11 @@ class Playlist < ActiveRecord::Base
 
   # returns an array of all of the songs in arrays of five
   def group_wej_songs
-    self.songs.each_slice(5).to_a
+    self.playlistsongs.each_slice(5).to_a
   end
 
-
   def top_requested_songs
-    self.playlistsongs.sort_by {|playlistsong| playlistsong.votes.count}.reverse.each_slice(5).to_a.first
+    self.playlistsongs.sort_by {|playlistsong| playlistsong.votes.where(request_type: 'vote').count}.reverse.each_slice(5).to_a.first
   end
 
   def generate_passcode
