@@ -4,14 +4,15 @@ $(document).ready(function() {
   $('#create-playlist-form').on('submit', (function(event) {
     event.preventDefault();
 
-    var playlistName = $('#spotify_id option:selected').text()
+    var playlistName = $('select#_spotify_id option:selected').text()
     $playlistForm = $(this)
-    var data = $playlistForm.serializeArray();
-    data.push({name: 'name', value: playlistName});
+    var playlistData = $playlistForm.find('form').serializeArray()
+    playlistData.push({name: 'name', value: playlistName});
     $.ajax({
       url: '/playlists',
       type: 'POST',
-      data: data
+      data: playlistData
+    }).done(function(response) {
     })
   })
 

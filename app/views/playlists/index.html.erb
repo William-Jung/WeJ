@@ -6,7 +6,7 @@
     <%= bootstrap_form_tag url: "/playlists/verify", hide_label: true do |f| %>
     <%= f.select(:id, options_for_select(@playlists), class: "selectpicker", hide_label: true) %>
   </div>
-  <%= f.submit "Select", class: "btn btn-info", role: "button" %>
+  <%= f.submit "Select", class: "btn btn-info" %>
   <% end %>
   <div class="col-md-12">
     <h1>or Add a Spotify Playlist</h1>
