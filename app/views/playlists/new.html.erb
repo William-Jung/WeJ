@@ -1,4 +1,4 @@
-<%= form_tag  "/playlists", :id => 'create-playlist-form' do %>
+<%= bootstrap_form_tag  url: "/playlists", :id => 'create-playlist-form', hide_label: true do |f| %>
   <%= select_tag(:spotify_id, options_for_select(@spotify_playlists)) %>
   <%= label_tag("Number of requests per hour") %>
   <%= number_field_tag("request_limit", nil, in: 0..10) %>
