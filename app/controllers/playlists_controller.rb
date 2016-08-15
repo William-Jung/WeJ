@@ -3,20 +3,36 @@ class PlaylistsController < ApplicationController
 include UsersHelper
 
   def new
-    user = User.find(session[:user_id])
-    spotify_user = RSpotify::User.new(user.spotify_user_hash)
-    @spotify_playlists = spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
+    if logged_in?
+      if current_user.spotify_user_hash
+        user = current_user
+          spotify_user = RSpotify::User.new(user.spotify_user_hash)
+          @spotify_playlists = spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
+      else
+        redirect_to playlists_find_path
+      end
+    else
+      redirect_to new_session_path
+    end
   end
 
   def create
-    @playlist = Playlist.new(playlist_params)
-    @playlist.name = params[:name]
-    @playlist.admin_id = current_user.id
-    @playlist.generate_passcode
-    if @playlist.save
-      redirect_to playlist_admin_path(@playlist)
+    if logged_in?
+      if current_user.spotify_user_hash
+        @playlist = Playlist.new(playlist_params)
+        @playlist.name = params[:name]
+        @playlist.admin_id = current_user.id
+        @playlist.generate_passcode
+        if @playlist.save
+          redirect_to playlist_admin_path(@playlist)
+        else
+          render :new
+        end
+      else
+        redirect_to playlists_find_path
+      end
     else
-      render :new
+      redirect_to new_session_path
     end
   end
 
@@ -46,11 +62,12 @@ include UsersHelper
   end
 
   def update
-    # @playlist = Playlist.find(params[:id])
-    p params
-    @spotify_song = RSpotify::Track.find(params[:song])
-    render json: @spotify_song
-    # @song = Song.new()
+    if logged_in?
+      @spotify_song = RSpotify::Track.find(params[:song])
+      render json: @spotify_song
+    else
+      redirect_to new_session_path
+    end
   end
 
   def index
@@ -64,8 +81,12 @@ include UsersHelper
   end
 
   def show
-    @playlist = Playlist.find(params[:id])
-    @playlistsongs = @playlist.playlistsongs
+    if logged_in?
+      @playlist = Playlist.find(params[:id])
+      @playlistsongs = @playlist.playlistsongs
+    else
+      redirect_to new_session_path
+    end
   end
 
   private
