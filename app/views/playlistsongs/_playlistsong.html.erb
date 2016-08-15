@@ -1,0 +1,6 @@
+<div id="song">
+<p id="song-title"><%= playlistsong.song.title %> | <%= playlistsong.song.artist %> | Votes: <%= playlistsong.votes.count %> |
+  <%= form_for(playlistsong, method: :delete) do |p| %>
+    <%= p.submit 'Delete' %>
+  <% end %>
+</p></div>

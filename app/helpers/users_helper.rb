@@ -5,7 +5,11 @@ module UsersHelper
   end
 
   def current_user
-    return @session_user ||= User.find(session[:user_id]) if logged_in?
+    @session_user ||= User.find(session[:user_id]) if logged_in?
+  end
+
+  def current_spotify_user
+    @session_spotify_user ||= RSpotify::User.new(current_user.spotify_user_hash)
   end
 
 end

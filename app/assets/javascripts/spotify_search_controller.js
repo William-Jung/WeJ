@@ -55,7 +55,7 @@ $(document).ready(function() {
       })
       .done(function(response) {
         console.log(response);
-        var song =            ,µnew Song(response)
+        var song = new Song(response)
         $('#songs').append('<h1>' + song.name + '</h1>')
 
       })

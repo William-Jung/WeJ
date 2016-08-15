@@ -4,10 +4,8 @@ include UsersHelper
 
   def new
     if logged_in?
-      if current_user.spotify_user_hash
-        user = current_user
-          spotify_user = RSpotify::User.new(user.spotify_user_hash)
-          @spotify_playlists = spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
+      if current_spotify_user
+        @spotify_playlists = current_spotify_user.playlists.map{|playlist| [playlist.name, playlist.id]}
       else
         redirect_to playlists_find_path
       end
@@ -24,6 +22,20 @@ include UsersHelper
         @playlist.admin_id = current_user.id
         @playlist.generate_passcode
         if @playlist.save
+          RSpotify::Playlist.find(current_spotify_user.id, playlist_params[:spotify_id]).tracks.each do |track|
+            @song_json = RSpotify::Track.find(track.id)
+            song_data = {
+              title: @song_json.name,
+              artist: @song_json.artists[0].name,
+              album: @song_json.album.name,
+              # release_date = @song_json
+              album_art: @song_json.album.images[0]['url'],
+              spotify_id: track.id
+            }
+            song = Song.create(song_data)
+            Playlistsong.create(playlist: @playlist, song: song)
+          end
+
           redirect_to playlist_admin_path(@playlist)
         else
           render :new
@@ -89,9 +101,13 @@ include UsersHelper
     end
   end
 
-  private
-    def playlist_params
-      params.permit(:spotify_id, :name, :request_limit, :flag_minimum, :allow_explicit)
-    end
+  def admin
+    @playlist = Playlist.find(params[:id])
+  end
 
+  private
+
+  def playlist_params
+    params.permit(:spotify_id, :name, :request_limit, :flag_minimum, :allow_explicit)
+  end
 end
