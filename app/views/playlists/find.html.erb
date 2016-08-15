@@ -1,14 +1,16 @@
 <div class="row">
-  <%= bootstrap_form_tag url: '/playlists/verify', layout: :horizontal, inline_errors: true do |f| %>
+
   <div class="col-md-12">
     <h1>Join a playlist</h1>
   </div>
-  <div class="col-sm-8">
-      <%= f.text_field :passcode %>
+
+  <div class="col-lg-2 col-md-2 col-sm-2">
+      <%= bootstrap_form_tag url: '/playlists/verify' do |f| %>
+      <%= f.text_field(:passcode, placeholder: "Passcode", hide_label: true) %>
   </div>
 
-  <div class="col-sm-4">
-    <%= f.submit "verify", class: "btn btn-info", role: "button" %>
+  <div class="col-md-4">
+    <%= f.submit "Join", class: "btn btn-info", role: "button" %>
     <% end %>
   </div>
 
@@ -19,6 +21,7 @@
   <div class="col-sm-12">
     <%= link_to 'Sign in with Spotify', '/auth/spotify', class: "btn btn-info", role: "button" %>
   </div>
+
 </div>
 
 
