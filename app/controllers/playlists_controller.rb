@@ -8,6 +8,9 @@ include UsersHelper
   end
 
   def create
+    puts "--------------------"
+    puts params
+    puts "--------------------"
     @playlist = Playlist.new(playlist_params)
 
     @playlist.name = playlist_params[:name]
