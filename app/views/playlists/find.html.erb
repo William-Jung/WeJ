@@ -1,7 +1,24 @@
-<%= form_tag('/playlists/verify') %>
-  <%= label_tag :passcode %>
-  <%= text_field_tag :passcode %><br>
+<div class="row">
+  <%= bootstrap_form_tag url: '/playlists/verify', layout: :horizontal, inline_errors: true do |f| %>
+  <div class="col-md-12">
+    <h1>Join a playlist</h1>
+  </div>
+  <div class="col-sm-8">
+      <%= f.text_field :passcode %>
+  </div>
 
-  <%= submit_tag "verify" %>
+  <div class="col-sm-4">
+    <%= f.submit "verify", class: "btn btn-info", role: "button" %>
+    <% end %>
+  </div>
 
-<%= link_to 'Sign in with Spotify', '/auth/spotify' %>
+  <div class="col-md-12">
+    <h1>Create and manage playlists</h1>
+  </div>
+
+  <div class="col-sm-12">
+    <%= link_to 'Sign in with Spotify', '/auth/spotify', class: "btn btn-info", role: "button" %>
+  </div>
+</div>
+
+
