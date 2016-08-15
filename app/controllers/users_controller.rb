@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    p params[:user]
     @user = User.new(user_params)
 
     if @user.valid?
@@ -19,14 +18,22 @@ class UsersController < ApplicationController
   end
 
   def spotify
-    @user = current_user
-    spotify_user = RSpotify::User.new(request.env['omniauth.auth'].to_hash)
-    @user.update(spotify_credentials: spotify_user.to_hash.to_s)
-    redirect_to playlists_path
+    if logged_in?
+      @user = current_user
+      spotify_user = RSpotify::User.new(request.env['omniauth.auth'].to_hash)
+      @user.update(spotify_credentials: spotify_user.to_hash.to_s)
+      redirect_to playlists_path
+    else
+      redirect_to new_session_path
+    end
   end
 
   def show
     @user = User.find(params[:id])
+
+    unless @user && @user.id == current_user.id
+      redirect_to new_session_path
+    end
   end
 
   private

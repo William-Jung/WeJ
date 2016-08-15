@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'users#new'
+  root 'playlists#find'
 
   get '/spotify' => 'spotify#show'
   post '/spotify' => 'spotify#search'
