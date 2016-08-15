@@ -1,15 +1,19 @@
-<% if @errors %>
-  <%= @errors %>
-<% end %>
+<div class="row">
+  <div class="col-md-10">
+    <% if @errors %>
+      <% @errors.each do |error|%>
+        <div class="alert alert-danger" role="alert"><%= error %></div>
+      <% end %>
+    <% end %>
+  </div>
 
-<%= form_tag('/users') do %>
-  <%= label_tag(:first_name, 'first name') %>
-  <%= text_field_tag(:first_name) %>
-  <%= label_tag(:last_name, 'last name') %>
-  <%= text_field_tag(:last_name) %>
-  <%= label_tag(:email, 'email') %>
-  <%= text_field_tag( :email) %>
-  <%= label_tag(:password, 'password') %>
-  <%= password_field_tag(:password) %>
-  <%= submit_tag ("Submit") %>
-<% end %>
+  <div class="col-md-10">
+    <%= bootstrap_form_tag url: '/users', layout: :horizontal, inline_errors: true do |f| %>
+    <%= f.text_field(:first_name) %>
+    <%= f.text_field(:last_name) %>
+    <%= f.text_field( :email) %>
+    <%= f.password_field(:password) %>
+    <%= f.submit "Register"%>
+  <% end %>
+  </div>
+</div>
