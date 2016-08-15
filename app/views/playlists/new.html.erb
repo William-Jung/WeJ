@@ -1,12 +1,13 @@
+<h1>Create WeJ Playlist</h1>
 <div id="create-playlist-form">
   <%= bootstrap_form_tag  url: "/playlists" do |f| %>
     <div class="form-group">
-    <%= f.select(:spotify_id, options_for_select(@spotify_playlists), class: "selectpicker", hide_label: true) %>
+    <%= f.select(:spotify_id, options_for_select(@spotify_playlists), class: "selectpicker", label: "Select a Spotify playlist") %>
     </div>
-    <%= f.number_field "request_limit", min: 0, max: 5  %>
-    <%= f.number_field "flag_minimum", min: 0, max: 5 %>
-    <%= f.check_box "allow_explicit", class: "checkbox" %>
-    <%= f.submit "Create WeJ Playlist" %>
+    <%= f.number_field "request_limit", min: 0, max: 5, label: "Number of allowed requests per user"  %>
+    <%= f.number_field "flag_minimum", min: 0, max: 5, label: "Number of track flags before admin notification" %>
+    <%= f.check_box "allow_explicit", class: "checkbox", label: "Allow explicit tracks" %>
+    <%= f.submit "Create WeJ Playlist", class: "btn btn-info" %>
   <% end %>
 </div>
 

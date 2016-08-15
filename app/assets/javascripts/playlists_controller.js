@@ -13,7 +13,6 @@ $(document).ready(function() {
       type: 'POST',
       data: playlistData
     }).done(function(response) {
-      // console.log(response)
     })
   })
 
