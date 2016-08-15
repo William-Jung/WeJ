@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/playlists/new' => 'playlists#new', as: 'new_playlist'
   post '/playlists' => 'playlists#create'
   get "/playlists/find" => "playlists#find"
-  get '/playlists/:id' => 'playlists#show'
+  get '/playlists/:id' => 'playlists#show', as: 'show_playlist'
   get '/playlists/:id/admin' => 'playlists#admin', as: 'playlist_admin'
   get '/playlists/:id/edit' => 'playlists#edit', as: 'playlist_edit'
   post "/playlists/verify" => "playlists#verify"
@@ -25,5 +25,7 @@ Rails.application.routes.draw do
   post "/sessions" => "sessions#create"
 
   get '/auth/spotify/callback' => 'users#spotify'
+
+  post '/votes' => 'votes#create'
 
 end

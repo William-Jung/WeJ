@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_secure_password
   before_save :set_full_name
 
+  validates :first_name, :last_name, :email, presence: true
+  validates :email, uniqueness: true
+
   def set_full_name
     if !self.full_name
       self.full_name = first_name + ' ' + last_name
