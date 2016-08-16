@@ -19,7 +19,11 @@ class PlaylistsongsController < ApplicationController
   end
 
   def edit
-    Playlistsong.find(params[:playlistsong_id]).update(has_been_played: params[:has_been_played])
+    playlistsong = Playlistsong.find(params[:playlistsong_id])
+    if playlistsong
+      playlistsong.update(has_been_played: params[:has_been_played])
+    end
     render :nothing => true
+
   end
 end
