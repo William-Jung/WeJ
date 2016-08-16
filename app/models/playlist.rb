@@ -14,7 +14,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def top_requested_songs
-    self.playlistsongs.sort_by {|playlistsong| playlistsong.votes.where(request_type: 'vote').count}.reverse.each_slice(5).to_a.first
+    self.playlistsongs.where(has_been_played: false).sort_by {|playlistsong| playlistsong.ranking}.reverse.each_slice(5).to_a.first
   end
 
   def generate_passcode

@@ -105,6 +105,7 @@ include UsersHelper
   def show
     if logged_in?
       @playlist = Playlist.find(params[:id])
+      @playlist.update_playlist_rankings
       @playlistsongs = @playlist.playlistsongs.order(:ranking)
     else
       redirect_to new_session_path
