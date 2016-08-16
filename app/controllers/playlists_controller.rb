@@ -106,7 +106,8 @@ include UsersHelper
     if logged_in?
       @playlist = Playlist.find(params[:id])
       @playlist.update_playlist_rankings
-      @playlistsongs = @playlist.playlistsongs.order(:ranking)
+      @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
+      @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
     else
       redirect_to new_session_path
     end

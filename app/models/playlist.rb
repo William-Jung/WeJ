@@ -4,6 +4,7 @@ class Playlist < ActiveRecord::Base
   has_many :listeners, foreign_key: :user_id
   has_many :playlistsongs
   has_many :songs, through: :playlistsongs
+  has_many :votes, through: :playlistsongs
 
   validates :name, :admin_id, :passcode, presence: true
   validates :passcode, uniqueness: true
@@ -14,7 +15,15 @@ class Playlist < ActiveRecord::Base
   end
 
   def top_requested_songs
-    self.playlistsongs.where(has_been_played: false).sort_by {|playlistsong| playlistsong.ranking}.reverse.each_slice(5).to_a.first
+    self.playlistsongs.where(has_been_played: false).sort_by {|playlistsong| playlistsong.ranking}.each_slice(5).to_a.first
+  end
+
+  def played_songs
+    self.playlistsongs.where(has_been_played: true).order(:ranking)
+  end
+
+  def currently_playing_song
+    self.playlistsongs.where(has_been_played: true).order(:ranking).last.id
   end
 
   def generate_passcode
