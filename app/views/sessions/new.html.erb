@@ -1,8 +1,10 @@
 <div class="row">
-  <h1 class="col-md-10">Login</h1>
   <div class="col-md-10">
     <% if @message %>
-      <div class="alert alert-danger" role="alert"><%= @message %></div>
+      <div class="alert alert-danger" role="alert">
+        <span class="glypthicon glypthicon-exclamation-sign" aria-hidden="true"></span>
+        <%= @message %>
+      </div>
     <% end %>
   </div>
 
