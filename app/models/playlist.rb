@@ -33,7 +33,7 @@ class Playlist < ActiveRecord::Base
       end
     end
     playlistsongs_to_be_played.each do |playlistsong|
-      playlistsong.update(ranking: playlistsongs_to_be_played.index(playlistsong) + played_songs)
+      playlistsong.update(ranking: playlistsongs_to_be_played.index(playlistsong) + played_songs + 1)
     end
   end
 end
