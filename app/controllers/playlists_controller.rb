@@ -69,6 +69,9 @@ include UsersHelper
 
     if @playlist
       if @playlist.passcode == params[:passcode]
+        unless Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
+          Listener.create(user_id: current_user.id, playlist_id: @playlist.id)
+        end
         redirect_to show_playlist_path(@playlist)
       elsif @playlist.admin_id == current_user.id
         redirect_to playlist_admin_path(@playlist)
@@ -100,8 +103,8 @@ include UsersHelper
   end
 
   def show
-    if logged_in?
-      @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find(params[:id])
+    if logged_in? && Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
       @playlistsongs = @playlist.playlistsongs.order(:ranking)
     else
       redirect_to new_session_path
