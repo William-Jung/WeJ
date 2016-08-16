@@ -38,7 +38,7 @@ include UsersHelper
             unless song
               song = Song.create(song_data)
             end
-            Playlistsong.create(playlist: @playlist, song: song, ranking: tracks.index(track))
+            Playlistsong.create(playlist: @playlist, song: song, ranking: tracks.index(track) + 1)
           end
 
           redirect_to playlist_admin_path(@playlist)
@@ -102,7 +102,7 @@ include UsersHelper
   def show
     if logged_in?
       @playlist = Playlist.find(params[:id])
-      @playlistsongs = @playlist.playlistsongs
+      @playlistsongs = @playlist.playlistsongs.order(:ranking)
     else
       redirect_to new_session_path
     end
