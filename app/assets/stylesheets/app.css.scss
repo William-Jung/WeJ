@@ -26,11 +26,21 @@ body {
   background-color: #181019;
 }
 
+.log-reg-page {
+  width: 100%;
+  text-align: center;
+}
+
 .app-logo {
-  margin: auto;
-  display: block;
-  width: 150px;
-  height: 150px;
+  margin: 0 auto;
+  width: 100%;
+  margin-left: 0px;
+}
+
+.image-responsive {
+  margin-left: 0px;
+  margin-bottom: 50px;
+  border-radius: 5px;
 }
 
 .form-control {
@@ -99,6 +109,10 @@ a:hover {
   font-family: Sofia Pro Light;
 }
 
+.center-log-reg {
+  margin-top: 20%;
+}
+
 @media screen and (max-width: 770px){
   a {
     font-size: 0.8em;
@@ -115,14 +129,40 @@ a:hover {
   .btn-info {
     max-width: 90%;
   }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
   .app-logo {
-    max-width: 10%;
-    max-height: 10%;
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
   }
 }
 
 @media screen and (min-width:771px) and (max-width:1040px){
   a {
     font-size: 1em;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
   }
 }

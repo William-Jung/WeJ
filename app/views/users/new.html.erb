@@ -1,30 +1,32 @@
-<div class="register-page">
+<div class="center-log-reg">
+  <div class="log-reg-page">
 
-  <div class="app-logo col-md-12">
-    <%= link_to image_tag("logo.png"), class: "image-responsive" %>
-  </div>
+    <div class="app-logo col-md-12">
+      <%= image_tag("logo.png", class: "image-responsive") %>
+    </div>
 
-  <div class="row">
-      <% if @errors %>
-      <div class="col-md-12">
-        <% @errors.each do |error| %>
-          <div class="alert alert-danger">
-            <%= error %>
-          </div>
+    <div class="row">
+        <% if @errors %>
+        <div class="col-md-12">
+          <% @errors.each do |error| %>
+            <div class="alert alert-danger">
+              <%= error %>
+            </div>
+          <% end %>
         <% end %>
+      </div>
+      <div class="col-md-12">
+        <%= bootstrap_form_tag url: '/users' do |f| %>
+        <%= f.text_field(:first_name, placeholder: "First name", hide_label: true) %>
+        <%= f.text_field(:last_name, placeholder: "Last name", hide_label: true )%>
+        <%= f.text_field( :email, placeholder: "Email", hide_label: true) %>
+        <%= f.password_field(:password, placeholder: "Password", hide_label: true) %>
+        <%= f.submit "Register", class: "btn btn-info btn-block"%>
       <% end %>
+      </div>
+      <div class="col-md-12" id="log-reg">
+        <%= link_to 'Already have an account? Login', new_session_path %>
+      </div>
     </div>
-    <div class="col-md-12">
-      <%= bootstrap_form_tag url: '/users' do |f| %>
-      <%= f.text_field(:first_name, placeholder: "First name", hide_label: true) %>
-      <%= f.text_field(:last_name, placeholder: "Last name", hide_label: true )%>
-      <%= f.text_field( :email, placeholder: "Email", hide_label: true) %>
-      <%= f.password_field(:password, placeholder: "Password", hide_label: true) %>
-      <%= f.submit "Register", class: "btn btn-info btn-block"%>
-    <% end %>
-    </div>
-    <div class="col-md-12" id="log-reg">
-      <%= link_to 'Already have an account? Login', new_session_path %>
-    </div>
-  </div>
-</div
+  </div
+</div>
