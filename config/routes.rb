@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get "/sessions/new" => "sessions#new", as: "new_session"
   post "/sessions" => "sessions#create"
+  get '/sessions/delete' => 'sessions#destroy', as: 'logout'
 
   get '/auth/spotify/callback' => 'users#spotify'
 

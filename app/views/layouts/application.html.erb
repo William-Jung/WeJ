@@ -9,6 +9,15 @@
 </head>
 <body>
   <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+    <% if current_user %>
+    <%= link_to 'Logout', logout_path %>
+    <% end %>
+  </div>
+  </div>
+  </div>
+  <div class="container">
   <%= yield %>
   </div>
 </body>
