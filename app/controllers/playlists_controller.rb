@@ -4,7 +4,7 @@ include UsersHelper
 
   def new
     if logged_in?
-      if current_spotify_user
+      if current_user.spotify_credentials
         @spotify_playlists = RSpotify::User.new(current_user.spotify_user_hash).playlists.map{|playlist| [playlist.name, playlist.id]}
       else
         redirect_to playlists_find_path
@@ -62,9 +62,10 @@ include UsersHelper
   end
 
   def verify
-    @playlist = Playlist.find_by(passcode: params[:passcode]) || Playlist.find(params[:id])
-    if !@playlist
-      @playlist = nil
+    if params[:passcode]
+      @playlist = Playlist.find_by(passcode: params[:passcode])
+    else
+      Playlist.find(params[:id])
     end
 
     if @playlist
@@ -76,9 +77,11 @@ include UsersHelper
       elsif @playlist.admin_id == current_user.id
         redirect_to playlist_admin_path(@playlist)
       else
+        @errors = true
         render 'find'
       end
     else
+      @errors = true
       render 'find'
     end
   end
@@ -105,7 +108,9 @@ include UsersHelper
   def show
     @playlist = Playlist.find(params[:id])
     if logged_in? && Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
-      @playlistsongs = @playlist.playlistsongs.order(:ranking)
+      @playlist.update_playlist_rankings
+      @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
+      @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
     else
       redirect_to new_session_path
     end

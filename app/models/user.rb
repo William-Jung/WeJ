@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   has_many :votes
 
   has_secure_password
-  before_save :set_full_name
+  before_validation :set_full_name
 
-  validates :first_name, :last_name, :email, presence: true
+  validates :full_name, :email, presence: true
   validates :email, uniqueness: true
 
   def set_full_name

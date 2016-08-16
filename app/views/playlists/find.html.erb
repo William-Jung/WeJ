@@ -4,6 +4,14 @@
     <h1>Join a playlist</h1>
   </div>
 
+</div>
+
+<div class="row">
+  <% if @errors %>
+      <p class="col-sm-4 alert alert-danger">Could not find playlist with that passcode</p>
+  <% end %>
+</div>
+<div class="row">
   <div class="col-lg-2 col-md-2 col-sm-2">
       <%= bootstrap_form_tag url: '/playlists/verify' do |f| %>
       <%= f.text_field(:passcode, placeholder: "Passcode", hide_label: true) %>
@@ -13,11 +21,13 @@
     <%= f.submit "Join", class: "btn btn-info", role: "button" %>
     <% end %>
   </div>
-
+</div>
+<div class="row">
   <div class="col-md-12">
     <h1>Create and manage playlists</h1>
   </div>
-
+</div>
+<div class="row">
   <div class="col-sm-12">
     <%= link_to 'Sign in with Spotify', '/auth/spotify', class: "btn btn-info", role: "button" %>
   </div>
