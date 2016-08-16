@@ -1,10 +1,57 @@
 @import "bootstrap";
 
-body {
-  background-color: #4A4B4C;
 
+
+@font-face {
+  font-family: "Sofia Pro Medium Italic";
+    src: asset-data-url('Sofia Pro Medium Italic.otf');
 }
+
+@font-face {
+  font-family: "Sofia Pro Medium";
+    src: asset-data-url('Sofia Pro Medium.otf');
+}
+
+@font-face {
+  font-family: "Sofia Pro Light";
+    src: asset-data-url('Sofia Pro Light.otf');
+}
+
+@font-face {
+  font-family: "Sofia Pro Ultra Light Italic";
+    src: asset-data-url('Sofia Pro Ultra Light Italic.otf');
+}
+
+body {
+  background-color: #181019;
+}
+
 .container {
   margin: 0 auto;
   color: white;
+}
+
+.btn-info {
+  background-color: #F46694;
+  font-family: "Sofia Pro Medium";
+}
+
+.btn-info:hover {
+  background-color: #F46694;
+  font-family: "Sofia Pro Light"
+}
+
+.row h1 {
+  color: #F79198;
+}
+
+a {
+  color: #00D966;
+  font-family: Sofia Pro Light;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #F46694;
+  font-family: Sofia Pro Light;
 }
