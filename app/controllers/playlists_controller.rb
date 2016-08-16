@@ -70,6 +70,9 @@ include UsersHelper
 
     if @playlist
       if @playlist.passcode == params[:passcode]
+        unless Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
+          Listener.create(user_id: current_user.id, playlist_id: @playlist.id)
+        end
         redirect_to show_playlist_path(@playlist)
       elsif @playlist.admin_id == current_user.id
         redirect_to playlist_admin_path(@playlist)
@@ -103,8 +106,8 @@ include UsersHelper
   end
 
   def show
-    if logged_in?
-      @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find(params[:id])
+    if logged_in? && Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
       @playlist.update_playlist_rankings
       @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
       @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
