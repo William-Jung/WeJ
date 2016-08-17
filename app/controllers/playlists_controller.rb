@@ -120,7 +120,11 @@ include PlaylistsHelper
     if logged_in? && Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
       @playlist.update_playlist_rankings
       @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
-      @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
+      if @playlist.top_requested_songs
+        @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
+      else
+        @playlistsongs = @playlist.played_songs
+      end
     else
       redirect_to new_session_path
     end

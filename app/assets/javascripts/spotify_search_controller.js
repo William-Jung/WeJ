@@ -54,7 +54,7 @@ $(document).ready(function() {
         url: '/playlists/' + id,
         type: 'PUT',
         data: data
-      }).errors(function(response){
+      }).error(function(response){
 
       }).done()
   });
