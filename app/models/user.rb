@@ -4,10 +4,9 @@ class User < ActiveRecord::Base
   has_many :votes
 
   has_secure_password
-  before_validation :set_full_name
 
-  validates :full_name, :email, presence: true
-  validates :email, uniqueness: true
+  validate :validate_full_name
+  validates :email, presence: true, uniqueness: true
 
   def set_full_name
     if !self.full_name
@@ -15,7 +14,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def validate_full_name
+    if first_name == "" && last_name == ""
+      errors.add(:full_name, "must include first and last name")
+    elsif first_name == ""
+      errors.add(:full_name, "must include first name")
+    elsif last_name == ""
+      errors.add(:full_name, "must include last name")
+    end
+  end
+
   def spotify_user_hash
     eval(self.spotify_credentials)
   end
+
+
 end
