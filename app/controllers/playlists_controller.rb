@@ -90,8 +90,7 @@ include PlaylistsHelper
             vote = Vote.new(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
           end
           unless vote.save
-            518
-            # render status: 429
+            render status: 429
           end
         else
           song = Song.create(construct_song_data(@spotify_song))
