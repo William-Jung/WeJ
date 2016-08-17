@@ -1,4 +1,6 @@
-Requests remaining: <%= @votes_remaining %>
+<div id="requests-remaining">
+  Requests remaining: <%= @votes_remaining %>
+</div>
 <div id="<%= @playlist.id %> search-div">
   <form action="/spotify" method="POST" name='search' id="search-form">
     <input type="search" name="query" id="search-box" placeholder="Start typing a song...">
@@ -7,27 +9,8 @@ Requests remaining: <%= @votes_remaining %>
 <div id="search-results">
 </div>
 </div>
-<% @playlistsongs.each do |playlistsong| %>
-  <% if playlistsong.id == @playlist.currently_playing_song %>
-    <div class="currently-playing"><p><strong><%= playlistsong.song.title %></strong></p></div>
-  <% else %>
-    <p><%= playlistsong.song.title %></p>
-  <% end %>
-  <% unless playlistsong.has_been_played || current_user.votes.where(playlistsong_id: playlistsong.id).count >= 1 %>
-    <% unless @votes_remaining <= 0 %>
-      <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post do |f| %>
-        <%= hidden_field_tag 'user_id', current_user.id %>
-        <%= hidden_field_tag 'request_type', 'vote' %>
-        <%= f.submit "vote" %>
-      <% end %>
-    <% end %>
-    <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post do |f| %>
-      <%= hidden_field_tag 'user_id', current_user.id %>
-      <%= hidden_field_tag 'request_type', 'flag' %>
-      <%= f.submit "flag" %>
-    <% end %>
-  <% end %>
-<% end %>
+<div id="song-list">
+  <%= render 'playlistsongs' %>
 
 <div class="modal" data-dismiss="modal" data-target="#myModal" id="myModal" role="dialog">
   <div class="modal-dialog">

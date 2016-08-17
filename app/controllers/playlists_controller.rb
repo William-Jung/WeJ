@@ -129,6 +129,9 @@ include PlaylistsHelper
       @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
       if @playlist.top_requested_songs
         @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
+        if request.xhr?
+          render '_playlistsongs', layout: false
+        end
       else
         @playlistsongs = @playlist.played_songs
       end
