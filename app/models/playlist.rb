@@ -23,7 +23,10 @@ class Playlist < ActiveRecord::Base
   end
 
   def currently_playing_song
-    self.playlistsongs.where(has_been_played: true).order(:ranking).last.id
+    last_song_played = self.playlistsongs.where(has_been_played: true).order(:ranking).last
+    if last_song_played
+      last_song_played.id
+    end
   end
 
   def generate_passcode
@@ -42,7 +45,7 @@ class Playlist < ActiveRecord::Base
       end
     end
     playlistsongs_to_be_played.each do |playlistsong|
-      playlistsong.update(ranking: playlistsongs_to_be_played.index(playlistsong) + played_songs)
+      playlistsong.update(ranking: playlistsongs_to_be_played.index(playlistsong) + played_songs + 1)
     end
   end
 end
