@@ -29,22 +29,19 @@ Requests remaining: <%= @votes_remaining %>
   <% end %>
 <% end %>
 
+<div class="modal" data-dismiss="modal" data-target="#myModal" id="myModal" role="dialog">
+  <div class="modal-dialog">
 
-<%= if @errors %>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-          <p><%= @errors %></p>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Okay</button>
-        </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>You can't vote on the same song!</p>
       </div>
-      
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Okay</button>
+      </div>
     </div>
+
   </div>
-<% end %>
+</div>
