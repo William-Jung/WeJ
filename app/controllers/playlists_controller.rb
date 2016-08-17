@@ -100,9 +100,7 @@ include PlaylistsHelper
           end
         end
         if request.xhr?
-
-        else
-          render :nothing => true
+          render text: playlist.request_limit - playlist.votes.where(user_id: current_user.id, request_type: 'vote').count
         end
       else
         render :nothing => true
