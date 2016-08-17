@@ -81,20 +81,24 @@ include PlaylistsHelper
   def update
     if logged_in?
       @spotify_song = RSpotify::Track.find(params[:song])
-      p @spotify_song
       if @spotify_song
         song = Song.find_by(spotify_id: @spotify_song.id)
         playlist = Playlist.find(params[:id])
         if song
           playlistsong = playlist.playlistsongs.where(song_id: song.id).first
-          vote = Vote.new(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
+          if playlist.votes.where(user_id: current_user.id, request_type: 'vote').count < playlist.request_limit
+            vote = Vote.new(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
+          end
           unless vote.save
-            render status: 429
+            518
+            # render status: 429
           end
         else
           song = Song.create(construct_song_data(@spotify_song))
           playlistsong = Playlistsong.create(playlist_id: playlist.id, song_id: song.id)
-          vote = Vote.create(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
+          if playlist.votes.where(user_id: current_user.id, request_type: 'vote').count < playlist.request_limit
+            vote = Vote.create(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
+          end
         end
         render :nothing => true
       else
