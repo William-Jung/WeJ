@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/playlists/:id/admin' => 'playlists#admin', as: 'playlist_admin'
   get '/playlists/:id/edit' => 'playlists#edit', as: 'playlist_edit'
   post "/playlists/verify" => "playlists#verify"
-  put '/playlists' => 'playlists#update'
+  put '/playlists/:id' => 'playlists#update'
 
 
   delete '/playlistsongs/:id' => 'playlistsongs#destroy', as: 'playlistsong'
