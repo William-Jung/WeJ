@@ -1,7 +1,6 @@
 class PlaylistsController < ApplicationController
-
 include UsersHelper
-
+include PlaylistsHelper
   def new
     if logged_in?
       if current_user.spotify_credentials
@@ -26,14 +25,7 @@ include UsersHelper
           tracks = RSpotify::Playlist.find(current_spotify_user.id, playlist_params[:spotify_id]).tracks
           tracks.each do |track|
             @song_json = RSpotify::Track.find(track.id)
-            song_data = {
-              title: @song_json.name,
-              artist: @song_json.artists[0].name,
-              album: @song_json.album.name,
-              # release_date = @song_json
-              album_art: @song_json.album.images[0]['url'],
-              spotify_id: track.id
-            }
+            song_data = construct_song_data(@song_json)
             song = Song.find_by(spotify_id: song_data[:spotify_id])
             unless song
               song = Song.create(song_data)
@@ -89,7 +81,25 @@ include UsersHelper
   def update
     if logged_in?
       @spotify_song = RSpotify::Track.find(params[:song])
-      render json: @spotify_song
+      p @spotify_song
+      if @spotify_song
+        song = Song.find_by(spotify_id: @spotify_song.id)
+        playlist = Playlist.find(params[:id])
+        if song
+          playlistsong = playlist.playlistsongs.where(song_id: song.id).first
+          vote = Vote.new(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
+          unless vote.save
+            render status: 429
+          end
+        else
+          song = Song.create(construct_song_data(@spotify_song))
+          playlistsong = Playlistsong.create(playlist_id: playlist.id, song_id: song.id)
+          vote = Vote.create(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
+        end
+        render :nothing => true
+      else
+        render :nothing => true
+      end
     else
       redirect_to new_session_path
     end
