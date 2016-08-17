@@ -4,36 +4,26 @@ $(document).ready(function() {
 
   $('#search-form').on('keyup', function(event) {
     event.preventDefault();
-
     if ($('#search-box').val().length > 4) {
-      console.log($(this));
       var data = $(this).serialize();
-      console.log(data);
       $.ajax({
         url: '/spotify',
         type: 'POST',
         data: data
       })
       .done(function(response) {
-        console.log("success");
-        console.log(response);
-
         songArray = []
-        var titlesArray = [];
-
+        titlesArray = [];
         for (object in response) {
           song = new Song(response[object]);
           titlesArray.push(song.name + " - " + song.artist)
           songArray.push(song)
         }
-
         $( "#search-box" ).autocomplete({
           source: titlesArray
         });
       })
     }
-    console.log("yea");
-
   });
 
   $('#search-form').on('submit', function(event) {
@@ -51,11 +41,9 @@ $(document).ready(function() {
     }
     console.log("exited from for loop");
     $.ajax({
-        url: '/playlists/' + id,
-        type: 'PUT',
-        data: data
-      }).errors(function(response){
-
-      }).done()
+      url: '/playlists/' + id,
+      type: 'PUT',
+      data: data
+    })
   });
 });

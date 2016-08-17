@@ -1,40 +1,10 @@
 Votes remaining: <%= @votes_remaining %>
 <div id="<%= @playlist.id %>">
   <form action="/spotify" method="POST" name='search' id="search-form">
-    <input type="search" name="query" id="search-box">
-    <select name="type">
-      <option value="song">Song</option>
-      <option value="artist">Artist</option>
-      <option value="album">Album</option>
-    </select>
-    <button type='submit' id="song-submit-button">Add Song</button>
+    <input type="search" name="query" id="search-box" placeholder="Request a song">
+    <button type='submit' id="song-submit-button">Request</button>
   </form>
 </div>
-<% if @return_json %>
-  <% if @return_json[0].class == RSpotify::Track %>
-    <% @return_json.each do |song| %>
-      <%= song.name %><br>
-      <%= song.album.name %><br>
-      <%= song.artists[0].name %><br><br>
-    <% end %>
-  <% end %>
-
-  <% if @return_json[0].class == RSpotify::Artist %>
-    <% @return_json.each do |artist| %>
-      <%= artist.name %><br>
-      <%= artist.genres[0] %><br>
-      <%= artist.popularity %><br><br>
-    <% end %>
-  <% end %>
-
-  <% if @return_json[0].class == RSpotify::Album %>
-    <% @return_json.each do |album| %>
-      <%= album.name %><br>
-      <%= album.genres[0] %><br>
-      <%= album.release_date %><br>
-    <% end %>
-  <% end %>
-<% end %>
 <% @playlistsongs.each do |playlistsong| %>
   <% if playlistsong.id == @playlist.currently_playing_song %>
     <div class="currently-playing"><p><strong><%= playlistsong.song.title %></strong></p></div>
