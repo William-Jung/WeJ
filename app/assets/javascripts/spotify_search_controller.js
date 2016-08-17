@@ -50,6 +50,7 @@ $(document).ready(function() {
       data: data
     }).done(function(){
       $('#search-box').val('')
+      $('')
     }).error(function() {
       var modal = $('#myModal').show();
     })
