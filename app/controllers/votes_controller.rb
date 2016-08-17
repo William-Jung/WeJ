@@ -8,7 +8,11 @@ class VotesController < ApplicationController
         Vote.create(user_id: params[:user_id], playlistsong: playlistsong, request_type: params[:request_type])
         playlist.update_playlist_rankings
       end
-      redirect_to show_playlist_path(playlist)
+      if request.xhr?
+        render text: playlist.request_limit - playlist.votes.where(user_id: current_user.id, request_type: 'vote').count
+      else
+        redirect_to show_playlist_path(playlist)
+      end
     else
       redirect_to new_session_path
     end

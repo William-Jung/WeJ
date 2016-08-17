@@ -1,7 +1,5 @@
 $(document).ready(function() {
-
   var songArray = [];
-
   $('#search-form').on('keyup', function(event) {
     event.preventDefault();
     $('#search-results').empty()
@@ -33,17 +31,14 @@ $(document).ready(function() {
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     var id = $(this).parent().attr('id')
-    console.log(id)
     var data;
     for (object in songArray) {
       if (songArray[object].name + " - " + songArray[object].artist == $('#search-box').val()) {
-
-      var newSong = songArray[object]
-      data = {song: newSong.id}
-      break;
+        var newSong = songArray[object]
+        data = {song: newSong.id}
+        break;
       }
     }
-    console.log("exited from for loop");
     $.ajax({
       url: '/playlists/' + id,
       type: 'PUT',
@@ -63,7 +58,17 @@ $(document).ready(function() {
 
   $('#search-results').on('click', 'p', function(){
     var text = $(this).text()
-    console.log(text)
     $('#search-box').val(text)
+  });
+
+  $('#song-list').on('submit', '.vote-button', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      method: $(this).attr('method'),
+      data: $(this).serialize()
+    }).done(function(response){
+      $('#requests-remaining').text('Requests remaining: ' + response)
+    })
   })
 });
