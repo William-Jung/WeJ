@@ -56,3 +56,23 @@ Votes remaining: <%= @votes_remaining %>
     <% end %>
   <% end %>
 <% end %>
+
+
+<%= if @errors %>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <p><%= @errors %></p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Okay</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<% end %>
