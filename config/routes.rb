@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   delete '/playlistsongs/:id' => 'playlistsongs#destroy', as: 'playlistsong'
   get '/playlist/:playlist_id/playlistsongs' => 'playlistsongs#songs', as: 'send_songs'
-  put '/playlist/:playlist_id/playlistsongs' => 'playlistsongs#edit', as: 'edit_songs'
+  put '/playlist/:playlist_id/playlistsongs' => 'playlistsongs#update'
   # get '/playlists/:playlistsong_id/has_been_played' => 'playlistsongs#test_update'
 
   get '/users/new' => 'users#new', as: "new_user"
