@@ -26,14 +26,38 @@ body {
   background-color: #181019;
 }
 
+.log-reg-page {
+  width: 100%;
+  text-align: center;
+}
+
+.app-logo {
+  margin: 0 auto;
+  width: 100%;
+  margin-left: 0px;
+}
+
+.image-responsive {
+  margin-left: 0px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
+.form-control {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
 .container {
   margin: 0 auto;
   color: white;
 }
 
 .btn-info {
+  margin: 0px auto;
   background-color: #F46694;
   font-family: "Sofia Pro Medium";
+  max-width: 70%;
 }
 
 .btn-info:hover {
@@ -41,17 +65,104 @@ body {
   font-family: "Sofia Pro Light"
 }
 
-.row h1 {
+
+.btn-info:visited {
+  background-color: #F46694;
+  font-family: "Sofia Pro Light"
+}
+
+.row {
+  margin: 0px auto;
+}
+
+ h1 {
   color: #F79198;
+}
+
+.alert-danger {
+  margin: 0px auto;
+  max-width: 70%;
+}
+
+#log-reg {
+  text-align: center;
+
+}
+
+.alert {
+  color: #EC4F82;
+  margin: 0px auto;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 1px;
 }
 
 a {
   color: #00D966;
   font-family: Sofia Pro Light;
+  margin-top: 30px;
 }
 
 a:hover {
   text-decoration: none;
   color: #F46694;
   font-family: Sofia Pro Light;
+}
+
+.center-log-reg {
+  margin-top: 20%;
+}
+
+@media screen and (max-width: 770px){
+  a {
+    font-size: 0.8em;
+  }
+
+  .form-control {
+    max-width: 90%
+  }
+
+  .alert-danger {
+    max-width: 90%;
+  }
+
+  .btn-info {
+    max-width: 90%;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (min-width:771px) and (max-width:1040px){
+  a {
+    font-size: 1em;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
+  }
 }
