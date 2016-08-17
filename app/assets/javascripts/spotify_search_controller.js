@@ -4,7 +4,9 @@ $(document).ready(function() {
 
   $('#search-form').on('keyup', function(event) {
     event.preventDefault();
+    $('#search-results').empty()
     if ($('#search-box').val().length > 4) {
+      console.log('keyup if')
       var data = $(this).serialize();
       $.ajax({
         url: '/spotify',
@@ -12,16 +14,18 @@ $(document).ready(function() {
         data: data
       })
       .done(function(response) {
+        console.log(response)
         songArray = []
-        titlesArray = [];
+        // var titlesArray = [];
         for (object in response) {
-          song = new Song(response[object]);
-          titlesArray.push(song.name + " - " + song.artist)
+          var song = new Song(response[object]);
+          // titlesArray.push(song.name + " - " + song.artist)
           songArray.push(song)
         }
-        $( "#search-box" ).autocomplete({
-          source: titlesArray
-        });
+        var songList = new SongList(songArray)
+        console.log(songList.toHtml())
+        $('#search-results').empty()
+        $('#search-results').append(songList.toHtml())
       })
     }
   });
@@ -44,6 +48,22 @@ $(document).ready(function() {
       url: '/playlists/' + id,
       type: 'PUT',
       data: data
+    }).done(function(){
+      $('#search-box').val('')
     })
   });
+
+  $('#search-results').on('mouseenter', 'p', function(){
+    $(this).css('background-color', '#EE6D94')
+  });
+
+  $('#search-results').on('mouseleave', 'p', function(){
+    $(this).css('background-color', '#181019')
+  });
+
+  $('#search-results').on('click', 'p', function(){
+    var text = $(this).text()
+    console.log(text)
+    $('#search-box').val(text)
+  })
 });

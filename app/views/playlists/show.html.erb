@@ -1,9 +1,11 @@
-Votes remaining: <%= @votes_remaining %>
-<div id="<%= @playlist.id %>">
+Requests remaining: <%= @votes_remaining %>
+<div id="<%= @playlist.id %> search-div">
   <form action="/spotify" method="POST" name='search' id="search-form">
-    <input type="search" name="query" id="search-box" placeholder="Request a song">
+    <input type="search" name="query" id="search-box" placeholder="Start typing a song...">
     <button type='submit' id="song-submit-button">Request</button>
   </form>
+<div id="search-results">
+</div>
 </div>
 <% @playlistsongs.each do |playlistsong| %>
   <% if playlistsong.id == @playlist.currently_playing_song %>
