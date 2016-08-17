@@ -45,8 +45,17 @@ $(document).ready(function() {
       data: data
     }).done(function(){
       $('#search-box').val('')
+    }).error(function() {
+      var modal = $('#myModal').show();
     })
   });
+
+  // display the modal when the user votes on the same song
+  $("#myModal").on('click', function(){
+    $('#myModal > div').hide();
+    $('#search-form')[0].reset();
+    $('#search-results').empty()
+  })
 
   $('#search-results').on('mouseenter', 'p', function(){
     $(this).css('background-color', '#EE6D94')
