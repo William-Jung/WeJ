@@ -100,7 +100,9 @@ include PlaylistsHelper
             vote = Vote.create(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
           end
         end
-        render :nothing => true
+        if request.xhr?
+          render text: playlist.request_limit - playlist.votes.where(user_id: current_user.id, request_type: 'vote').count
+        end
       else
         render :nothing => true
       end
