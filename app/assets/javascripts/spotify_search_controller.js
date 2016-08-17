@@ -38,6 +38,8 @@ $(document).ready(function() {
 
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
+    var id = $(this).parent().attr('id')
+    console.log(id)
     var data;
     for (object in songArray) {
       if (songArray[object].name + " - " + songArray[object].artist == $('#search-box').val()) {
@@ -49,18 +51,11 @@ $(document).ready(function() {
     }
     console.log("exited from for loop");
     $.ajax({
-        url: '/playlists',
+        url: '/playlists/' + id,
         type: 'PUT',
         data: data
-      })
-      .done(function(response) {
-        console.log(response);
-        var song = new Song(response)
-        $('#songs').append('<h1>' + song.name + '</h1>')
+      }).errors(function(response){
 
-      })
+      }).done()
   });
-
-
-
 });
