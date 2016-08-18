@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/playlists' => 'playlists#index', as: 'playlists'
   get '/playlists/new' => 'playlists#new', as: 'new_playlist'
   post '/playlists' => 'playlists#create'
-  get "/playlists/find" => "playlists#find"
+  get "/playlists/find" => "playlists#find", as: 'find_playlist'
   get '/playlists/send_mobile' => 'playlists#send_mobile'
   get '/playlists/:id' => 'playlists#show', as: 'show_playlist'
   get '/playlists/:id/admin' => 'playlists#admin', as: 'playlist_admin'
