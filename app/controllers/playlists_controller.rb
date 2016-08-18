@@ -54,14 +54,15 @@ include PlaylistsHelper
   end
 
   def verify
+    given_passcode = params[:passcode].upcase
     if params[:passcode]
-      @playlist = Playlist.find_by(passcode: params[:passcode])
+      @playlist = Playlist.find_by(passcode: given_passcode)
     else
       Playlist.find(params[:id])
     end
 
     if @playlist
-      if @playlist.passcode == params[:passcode]
+      if @playlist.passcode == given_passcode
         unless Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
           Listener.create(user_id: current_user.id, playlist_id: @playlist.id)
         end
