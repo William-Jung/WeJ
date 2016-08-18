@@ -9,10 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-    <%= yield %>
-  </div>
-    <div class="container logout">
+  <div class="container logout">
     <div class="row">
       <div class="col-md-10">
         <% if current_user %>
@@ -20,6 +17,9 @@
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <%= yield %>
   </div>
 </body>
 </html>
