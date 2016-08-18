@@ -86,11 +86,12 @@ include PlaylistsHelper
         playlist = Playlist.find(params[:id])
         if song
           playlistsong = playlist.playlistsongs.where(song_id: song.id).first
+          vote = Vote.new
           if playlist.votes.where(user_id: current_user.id, request_type: 'vote').count < playlist.request_limit
             vote = Vote.new(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
           end
           unless vote.save
-            render status: 429
+            render status: 406
           end
         else
           song = Song.create(construct_song_data(@spotify_song))
@@ -99,7 +100,9 @@ include PlaylistsHelper
             vote = Vote.create(user_id: current_user.id, playlistsong_id: playlistsong.id, request_type: 'vote')
           end
         end
-        render :nothing => true
+        if request.xhr?
+          render text: playlist.request_limit - playlist.votes.where(user_id: current_user.id, request_type: 'vote').count
+        end
       else
         render :nothing => true
       end

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   def validate_full_name
     if first_name == "" && last_name == ""
-      errors.add(:full_name, "must include first and last name")
+      errors.add(:full_name, "needs first and last name")
     elsif first_name == ""
       errors.add(:full_name, "must include first name")
     elsif last_name == ""

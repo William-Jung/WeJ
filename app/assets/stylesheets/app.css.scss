@@ -1,7 +1,5 @@
 @import "bootstrap";
 
-
-
 @font-face {
   font-family: "Sofia Pro Medium Italic";
     src: asset-data-url('Sofia Pro Medium Italic.otf');
@@ -37,15 +35,27 @@ body {
   margin-left: 0px;
 }
 
+.center-log-reg {
+  margin-top: 10%;
+}
+
+#log-reg {
+  text-align: center;
+}
+
 .image-responsive {
   margin-left: 0px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   border-radius: 5px;
 }
 
 .form-control {
   max-width: 70%;
   margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 3px;
 }
 
 .container {
@@ -65,7 +75,6 @@ body {
   font-family: "Sofia Pro Light"
 }
 
-
 .btn-info:visited {
   background-color: #F46694;
   font-family: "Sofia Pro Light"
@@ -82,12 +91,9 @@ body {
 .alert-danger {
   margin: 0px auto;
   max-width: 70%;
+  font-size: 0.9em;
 }
 
-#log-reg {
-  text-align: center;
-
-}
 
 .alert {
   color: #EC4F82;
@@ -113,9 +119,6 @@ a:hover {
   font-family: Sofia Pro Light;
 }
 
-.center-log-reg {
-  margin-top: 20%;
-}
 
 @media screen and (max-width: 770px){
   a {
@@ -123,7 +126,7 @@ a:hover {
   }
 
   .form-control {
-    max-width: 90%
+    max-width: 90%;
   }
 
   .alert-danger {

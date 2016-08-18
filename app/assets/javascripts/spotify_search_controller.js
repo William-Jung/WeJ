@@ -43,8 +43,10 @@ $(document).ready(function() {
       url: '/playlists/' + id,
       type: 'PUT',
       data: data
-    }).done(function(){
+    }).done(function(response){
       $('#search-box').val('')
+      $('#search-results').html('')
+      $('#requests-remaining').text('Requests remaining: ' + response)
     }).error(function() {
       var modal = $('#myModal').show();
     })
