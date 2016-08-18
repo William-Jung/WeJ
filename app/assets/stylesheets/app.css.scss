@@ -107,6 +107,18 @@ body {
   color: black;
 }
 
+.song-title {
+  font-family: Sofia Pro Light;
+}
+
+.song-artist {
+  font-family: Sofia Pro Light;
+}
+
+.song-album {
+  font-family: Sofia Pro Ultra Light Italic;
+}
+
 a {
   color: #00D966;
   font-family: Sofia Pro Light;
@@ -119,6 +131,11 @@ a:hover {
   font-family: Sofia Pro Light;
 }
 
+
+.currently-playing, .past-and-present {
+  color: #EC4F82;
+  vertical-align: top;
+}
 
 @media screen and (max-width: 770px){
   a {

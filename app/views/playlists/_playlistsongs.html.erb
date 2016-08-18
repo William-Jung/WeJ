@@ -1,8 +1,25 @@
 <% @playlistsongs.each do |playlistsong| %>
   <% if playlistsong.id == @playlist.currently_playing_song %>
-    <div class="currently-playing"><p><strong><%= playlistsong.song.title %></strong></p></div>
+    <div class="currently-playing row">
+      <div class="span4">
+        <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
+      </div>
+      <div class="clear:both">
+        <span class="song-title"><%= playlistsong.song.title %></span><br>
+        <span class="song-artist"><%= playlistsong.song.artist %> • </span><span class="song-album"><%= playlistsong.song.album %></span>
+      </div>
+    </div>
   <% else %>
-    <p><%= playlistsong.song.title %></p>
+  <div class="past-and-present row">
+    <div class="span4">
+      <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
+    </div>
+    <div class="clear:both">
+      <span class="song-title"><%= playlistsong.song.title %></span><br>
+      <span class="song-artist"><%= playlistsong.song.artist %> • </span>
+      <span class="song-album"><%= playlistsong.song.album %></span>
+    </div>
+  </div>
   <% end %>
   <% unless playlistsong.has_been_played || current_user.votes.where(playlistsong_id: playlistsong.id).count >= 1 %>
     <% unless @votes_remaining <= 0 %>
