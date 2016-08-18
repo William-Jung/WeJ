@@ -21,6 +21,18 @@ class SessionsController < ApplicationController
     end
   end
 
+  def mobileAuth
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
+      loginInfo = {loginStatus: "verified"}
+      loginInfo[:user_id] = @user.id.to_s
+    else
+      loginInfo = {loginStatus: "credentials invalid"}
+    end
+
+    render json: loginInfo.to_json
+  end
+
   def destroy
     session[:user_id] = nil
     redirect_to root_path
