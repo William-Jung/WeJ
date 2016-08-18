@@ -1,0 +1,24 @@
+h2 {
+  margin-top: 10%;
+  color: #F79198;
+  text-align: center;
+  font-family: "Sofia Pro Medium Italic";
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5%;
+  font-family: "Sofia Pro Medium";
+}
+
+
+@media screen and (max-width: 770px){
+  .form-inline {
+    max-width: 70%;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+}
+
