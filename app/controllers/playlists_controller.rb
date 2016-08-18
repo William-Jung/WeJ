@@ -118,27 +118,6 @@ include PlaylistsHelper
     end
   end
 
-  def show
-    @playlist = Playlist.find(params[:id])
-    if logged_in? && Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
-      @playlist.update_playlist_rankings
-      @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
-      if @playlist.top_requested_songs
-        @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
-        if request.xhr?
-          render '_playlistsongs', layout: false
-        end
-      else
-        @playlistsongs = @playlist.played_songs
-      end
-    else
-      redirect_to new_session_path
-    end
-  end
-
-  def admin
-    @playlist = Playlist.find(params[:id])
-  end
 
   def send_mobile
     p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
@@ -163,6 +142,30 @@ include PlaylistsHelper
     p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
     render json: @playlists
   end
+
+
+  def show
+    @playlist = Playlist.find(params[:id])
+    if logged_in? && Listener.where(user_id: current_user.id, playlist_id: @playlist.id).count > 0
+      @playlist.update_playlist_rankings
+      @votes_remaining = @playlist.request_limit - @playlist.votes.where(request_type: 'vote', user_id: current_user.id).count
+      if @playlist.top_requested_songs
+        @playlistsongs = @playlist.played_songs + @playlist.top_requested_songs
+        if request.xhr?
+          render '_playlistsongs', layout: false
+        end
+      else
+        @playlistsongs = @playlist.played_songs
+      end
+    else
+      redirect_to new_session_path
+    end
+  end
+
+  def admin
+    @playlist = Playlist.find(params[:id])
+  end
+
 
   private
 
