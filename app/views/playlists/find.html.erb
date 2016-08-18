@@ -21,7 +21,7 @@
 
     <div class="passcode">
       <%= bootstrap_form_tag url: '/playlists/verify' do |f| %>
-        <%= f.text_field(:passcode, placeholder: "Passcode", hide_label: true) %>
+        <%= f.text_field(:passcode, placeholder: "Passcode", hide_label: true, :autocomplete => :off) %>
         <%= f.submit "Join", class: "btn btn-info btn-block" %>
       <% end %>
     </div>
