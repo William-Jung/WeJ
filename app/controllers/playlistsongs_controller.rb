@@ -2,6 +2,7 @@ class PlaylistsongsController < ApplicationController
   def destroy
     @playlistsong = Playlistsong.find(params[:id])
     @playlistsong.destroy
+    render :nothing => true
   end
 
   def songs
