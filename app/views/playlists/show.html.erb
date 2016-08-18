@@ -1,16 +1,20 @@
-<div id="requests-remaining">
-  Requests remaining: <%= @votes_remaining %>
-</div>
-<div id="<%= @playlist.id %> search-div">
-  <form action="/spotify" method="POST" name='search' id="search-form">
-    <input type="search" name="query" id="search-box" placeholder="Start typing a song...">
-    <button type='submit' id="song-submit-button">Request</button>
-  </form>
-<div id="search-results">
-</div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+      <div class="navbar-header" id='<%= @playlist.id %>'>
+         <p class="navbar-brand hidden-xs" id="requests-remaining">Requests remaining: <%= @votes_remaining %></p>
+          <form class="navbar-form pull-left" role="search" action="/spotify" method="POST" name='search' id="search-form">
+            <div class="input-group">
+              <input class="form-control"type="search" name="query" id="search-box" placeholder="Start typing a song..." autocomplete="off">
+              <button type='submit' class="btn btn-info" id="song-submit-button">Request</button>
+            </div>
+         </form>
+      </div>
+      <div id="search-results">
+      </div>
+   </div>
 </div>
 
-<div id="song-list">
+<div class="container" id="song-list">
   <%= render 'playlistsongs' %>
 </div>
 <div class="modal" data-dismiss="modal" data-target="#myModal" id="myModal" role="dialog">
@@ -19,7 +23,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-body">
-        <p>You can't vote on the same song!</p>
+        <p>You can't vote on the same song more than once!</p>
       </div>
 
       <div class="modal-footer">
