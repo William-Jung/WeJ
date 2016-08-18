@@ -14,7 +14,6 @@ $(document).ready(function() {
         data: data
       })
       .done(function(response) {
-        console.log(response)
         songArray = []
         // var titlesArray = [];
         for (object in response) {
@@ -23,7 +22,6 @@ $(document).ready(function() {
           songArray.push(song)
         }
         var songList = new SongList(songArray)
-        console.log(songList.toHtml())
         $('#search-results').show()
         $('#search-results').empty()
         $('#search-results').append(songList.toHtml())
