@@ -1,38 +1,44 @@
 <% @playlistsongs.each do |playlistsong| %>
-  <% if playlistsong.id == @playlist.currently_playing_song %>
-    <div class="currently-playing row">
-      <div class="span4">
-        <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
+  <div class="song-container">
+    <span class="song-info">
+      <% if playlistsong.id == @playlist.currently_playing_song %>
+        <div class="currently-playing row">
+          <div class="span4">
+            <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
+          </div>
+          <div class="clear:both">
+            <span class="song-title"><%= playlistsong.song.title %></span><br>
+            <span class="song-artist"><%= playlistsong.song.artist %> • </span><span class="song-album"><%= playlistsong.song.album %></span>
+          </div>
+        </div>
+      <% else %>
+      <div class="past-and-present row">
+        <div class="span4">
+          <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
+        </div>
+        <div class="clear:both">
+          <span class="song-title"><%= playlistsong.song.title %></span><br>
+          <span class="song-artist"><%= playlistsong.song.artist %> • </span>
+          <span class="song-album"><%= playlistsong.song.album %></span>
+        </div>
       </div>
-      <div class="clear:both">
-        <span class="song-title"><%= playlistsong.song.title %></span><br>
-        <span class="song-artist"><%= playlistsong.song.artist %> • </span><span class="song-album"><%= playlistsong.song.album %></span>
-      </div>
-    </div>
-  <% else %>
-  <div class="past-and-present row">
-    <div class="span4">
-      <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
-    </div>
-    <div class="clear:both">
-      <span class="song-title"><%= playlistsong.song.title %></span><br>
-      <span class="song-artist"><%= playlistsong.song.artist %> • </span>
-      <span class="song-album"><%= playlistsong.song.album %></span>
-    </div>
-  </div>
-  <% end %>
-  <% unless playlistsong.has_been_played || current_user.votes.where(playlistsong_id: playlistsong.id).count >= 1 %>
-    <% unless @votes_remaining <= 0 %>
-      <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post, html: {class: 'vote-button'} do |f| %>
-        <%= hidden_field_tag 'user_id', current_user.id %>
-        <%= hidden_field_tag 'request_type', 'vote' %>
-        <%= f.submit "vote" %>
       <% end %>
-    <% end %>
-    <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post, http: { class: 'flag-button'} do |f| %>
-      <%= hidden_field_tag 'user_id', current_user.id %>
-      <%= hidden_field_tag 'request_type', 'flag' %>
-      <%= f.submit "flag" %>
-    <% end %>
-  <% end %>
+    </span>
+    <span id='vote-flag'>
+      <% unless playlistsong.has_been_played || current_user.votes.where(playlistsong_id: playlistsong.id).count >= 1 %>
+        <% unless @votes_remaining <= 0 %>
+          <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post, html: {class: 'vote-button'} do |f| %>
+            <%= hidden_field_tag 'user_id', current_user.id %>
+            <%= hidden_field_tag 'request_type', 'vote' %>
+            <%= f.submit '', class: 'vote' %>
+          <% end %>
+        <% end %>
+        <%= form_for playlistsong, url: {controller: "votes", action: "create", id: playlistsong.id}, method: :post, http: { class: 'flag-button'} do |f| %>
+          <%= hidden_field_tag 'user_id', current_user.id %>
+          <%= hidden_field_tag 'request_type', 'flag' %>
+          <%= f.submit "", class: "flag" %>
+        <% end %>
+      <% end %>
+    </span>
+  </div>
 <% end %>
