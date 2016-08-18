@@ -1,24 +1,25 @@
 <% @playlistsongs.each do |playlistsong| %>
   <% if playlistsong.id == @playlist.currently_playing_song %>
     <div class="currently-playing row">
-      <div class="col-sm-2">
-        <span><%= image_tag playlistsong.song.album_art, size: "64x64" %></span>
+      <div class="span4">
+        <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
       </div>
-      <div class="col-sm-10">
-        <span class="song-title"><strong><%= playlistsong.song.title %></strong></span><br>
+      <div class="clear:both">
+        <span class="song-title"><%= playlistsong.song.title %></span><br>
         <span class="song-artist"><%= playlistsong.song.artist %> • </span><span class="song-album"><%= playlistsong.song.album %></span>
       </div>
     </div>
   <% else %>
   <div class="past-and-present row">
-    <div class="col-sm-2">
-      <span><%= image_tag playlistsong.song.album_art, size: "64x64" %></span>
+    <div class="span4">
+      <span><%= image_tag playlistsong.song.album_art, size: "64x64", style: 'float:left;' %></span>
     </div>
-    <div class="col-sm-10">
+    <div class="clear:both">
       <span class="song-title"><%= playlistsong.song.title %></span><br>
       <span class="song-artist"><%= playlistsong.song.artist %> • </span>
       <span class="song-album"><%= playlistsong.song.album %></span>
     </div>
+  </div>
   <% end %>
   <% unless playlistsong.has_been_played || current_user.votes.where(playlistsong_id: playlistsong.id).count >= 1 %>
     <% unless @votes_remaining <= 0 %>
