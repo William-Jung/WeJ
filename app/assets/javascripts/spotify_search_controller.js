@@ -1,7 +1,9 @@
 $(document).ready(function() {
+  $('#search-results').hide()
   var songArray = [];
-  $('#search-form').on('keyup', function(event) {
+  $('#search-box').on('keyup', function(event) {
     event.preventDefault();
+    $('#search-results').hide()
     $('#search-results').empty()
     if ($('#search-box').val().length > 4) {
       console.log('keyup if')
@@ -12,7 +14,6 @@ $(document).ready(function() {
         data: data
       })
       .done(function(response) {
-        console.log(response)
         songArray = []
         // var titlesArray = [];
         for (object in response) {
@@ -21,7 +22,7 @@ $(document).ready(function() {
           songArray.push(song)
         }
         var songList = new SongList(songArray)
-        console.log(songList.toHtml())
+        $('#search-results').show()
         $('#search-results').empty()
         $('#search-results').append(songList.toHtml())
       })
@@ -39,24 +40,29 @@ $(document).ready(function() {
         break;
       }
     }
-    $.ajax({
-      url: '/playlists/' + id,
-      type: 'PUT',
-      data: data
-    }).done(function(response){
-      $('#search-box').val('')
-      $('#search-results').html('')
-      $('#requests-remaining').text('Requests remaining: ' + response)
-    }).error(function() {
-      var modal = $('#myModal').show();
-    })
+    if ( data ) {
+      $.ajax({
+        url: '/playlists/' + id,
+        type: 'PUT',
+        data: data
+      }).done(function(response){
+        $('#search-box').val('')
+        $('#search-results').html('')
+        $('#requests-remaining').text('Requests remaining: ' + response)
+        $('#search-results').hide()
+      }).error(function() {
+        var modal = $('#myModal').show();
+      })
+    }
   });
 
   // display the modal when the user votes on the same song
   $("#myModal").on('click', function(){
-    $('#myModal > div').hide();
-    $('#search-form')[0].reset();
-    $('#search-results').empty()
+    $('#myModal').hide();
+    $('#search-box').val('')
+    $('#search-results').html('');
+    $('#search-results').hide()
+    $('#search-box').focus()
   })
 
   $('#search-results').on('mouseenter', 'p', function(){

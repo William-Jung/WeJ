@@ -1,0 +1,358 @@
+@import "bootstrap";
+
+@font-face {
+  font-family: "Sofia Pro Medium Italic";
+    src: asset-data-url('Sofia Pro Medium Italic.otf');
+}
+
+@font-face {
+  font-family: "Sofia Pro Medium";
+    src: asset-data-url('Sofia Pro Medium.otf');
+}
+
+@font-face {
+  font-family: "Sofia Pro Light";
+    src: asset-data-url('Sofia Pro Light.otf');
+}
+
+@font-face {
+  font-family: "Sofia Pro Ultra Light Italic";
+    src: asset-data-url('Sofia Pro Ultra Light Italic.otf');
+}
+
+body {
+  background-color: #181019;
+}
+
+.log-reg-page {
+  width: 100%;
+  text-align: center;
+}
+
+.app-logo {
+  margin: 0 auto;
+  width: 100%;
+  margin-left: 0px;
+}
+
+.center-log-reg {
+  margin-top: 10%;
+}
+
+#log-reg {
+  text-align: center;
+}
+
+.image-responsive {
+  margin-left: 0px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+
+.form-control {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 3px;
+}
+
+.container {
+  margin: 0 auto;
+  color: white;
+}
+
+.btn-info {
+  margin: 0px auto;
+  background-color: #F46694 !important;
+  font-family: "Sofia Pro Medium";
+  max-width: 70%;
+}
+
+.btn-info:hover {
+  background-color: #F46694;
+  font-family: "Sofia Pro Light"
+}
+
+.btn-info:visited {
+  background-color: #F46694;
+  font-family: "Sofia Pro Light"
+}
+
+.row {
+  margin: 0px auto;
+}
+
+ h1 {
+  color: #F79198;
+}
+
+.alert-danger {
+  margin: 0px auto;
+  max-width: 70%;
+  font-size: 0.9em;
+}
+
+
+.alert {
+  color: #EC4F82;
+  margin: 0px auto;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 1px;
+}
+
+.modal {
+  color: black;
+}
+
+.song-title {
+  font-family: Sofia Pro Light;
+}
+
+.song-artist {
+  font-family: Sofia Pro Light;
+}
+
+.song-album {
+  font-family: Sofia Pro Ultra Light Italic;
+}
+
+a {
+  color: #00D966;
+  font-family: Sofia Pro Light;
+  margin-top: 30px;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #F46694;
+  font-family: Sofia Pro Light;
+}
+
+
+.currently-playing, .past-and-present {
+  color: #EC4F82;
+  vertical-align: top;
+}
+
+.currently-playing {
+  color: #00D966;
+}
+
+.navbar {
+  background-color: #181019;
+}
+
+#search-results {
+  border: 1px solid white;
+  font-family: sofia pro medium italic;
+}
+
+#search-box {
+  display: inline-block;
+  vertical-align: top;
+  width: 65%
+}
+
+#song-submit-button {
+  display: inline-block;
+  vertical-align: top;
+  width: 35%;
+}
+
+#song-list {
+  padding-top: 10%;
+}
+
+.album-art {
+  padding-right: 2px;
+  margin-bottom: 2px;
+}
+
+.song-artist, .song-title {
+  padding-left: 5px;
+}
+
+.song-info {
+  display: inline-block;
+  vertical-align: top;
+  width: 88%;
+}
+
+#vote-flag {
+  display: inline-block;
+  vertical-align: top;
+  width: 10%;
+  z-index: 8;
+
+}
+
+.vote {
+  border: none;
+  width: 34px;
+  background: url('heart_unfilled.png');
+  background-repeat: none;
+}
+
+.flag {
+  border: none;
+  width: 30px;
+  height: 30px;
+  margin-left: 2px;
+  background: url('cancel.png');
+  background-repeat: none;
+}
+
+#requests-remaining {
+  font-family: Sofia Pro Ultra Light Italic;
+}
+
+.logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+#myModal {
+  z-index: 10000;
+}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px){
+  a {
+    font-size: 0.8em;
+  }
+
+  .form-control {
+    max-width: 90%;
+  }
+
+  .alert-danger {
+    max-width: 90%;
+  }
+
+  .btn-info {
+    max-width: 90%;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
+  }
+
+  #song-list {
+    padding-top: 40%;
+  }
+}
+
+@media only screen and (min-device-width : 375px) and (max-device-width : 667px){
+  a {
+    font-size: 0.8em;
+  }
+
+  .form-control {
+    max-width: 90%;
+  }
+
+  .alert-danger {
+    max-width: 90%;
+  }
+
+  .btn-info {
+    max-width: 90%;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
+  }
+
+  #song-list {
+    padding-top: 32%;
+  }
+}
+
+@media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
+a {
+    font-size: 0.8em;
+  }
+
+  .form-control {
+    max-width: 90%;
+  }
+
+  .alert-danger {
+    max-width: 90%;
+  }
+
+  .btn-info {
+    max-width: 90%;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
+  }
+
+  #song-list {
+    padding-top: 352;
+  }
+}
+
+@media screen and (min-width:761px) and (max-width:1040px){
+  a {
+    font-size: 1em;
+  }
+
+  .log-reg-page {
+    width: 100%;
+    text-align: center;
+  }
+
+  .app-logo {
+    margin: 0 auto;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .image-responsive {
+    margin-left: 0px;
+  }
+
+  #song-list {
+    padding-top: 18%;
+  }
+}
