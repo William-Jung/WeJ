@@ -12,6 +12,7 @@ Music connects people, and people love music. At any social gathering, we should
 
 ## Installing WeJ
 As a listener, visit [WeJ](http://we-j.herokuapp.com)
+After creating an account type the passcode: MKCMMR to access a playlist
 
 ## Using the App
 Requesting a song is as easy as listening to one, check us out!
